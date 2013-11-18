@@ -1,0 +1,101 @@
+<div class="container-fluid" ng_init="init()">
+    <div class="row-fluid">
+<!--
+        <h2 ng-show="name">{{name}}
+            <div class="btn" ng-click="save()">Save</div>
+            <div class="btn" ng-click="startFresh()">Close</div>
+        </h2>
+        <br />
+-->
+        <tabset>
+            <tab heading="You">
+                <div class="span11">
+                    <accordion close-others="false">
+                        <accordion-group ng-repeat="teacher in teachers">
+                            <accordion-heading>
+                                <span ng-click="loadList($index)">
+                                    {{teacher.name}} - {{teacher.email}}
+                                    <span ng-show="resumeLists[teacher.email].length">
+                                        ({{resumeLists[teacher.email].length}})
+                                    </span>
+                                </span>
+                            </accordion-heading>
+                            <div ng-show="!resumeLists[teacher.email].length">
+                                Click the header to load resumes
+                            </div>
+                            <ol>
+                                <li ng-repeat="resume in resumeLists[teacher.email]">
+                                    <a ng-click="loadResume(teacher.email, resume._id)">
+                                        {{resume.name}}
+                                    </a>
+                                </li>
+                            </ol>
+                        </accordion-group>
+                    </accordion>
+                 </div>
+            </tab>
+            <tab heading="Social commitments">
+                <div class="span12">
+                    <div name="sentence" ng-repeat="sentence in sentences">
+                        <i class="icon-thumbs-up" ng-click="accept($index)"></i>
+                        <i class="icon-thumbs-down" ng-click="reject($index)"></i>
+                        {{sentence.toString()}}
+                    </div>
+                    <h2 ng-show="goodSentences.length">
+                        Good Sentences
+                    </h2>
+                    <div name="sentence" ng-repeat="sentence in goodSentences">
+                   <!--
+                        <i class="icon-thumbs-up" ng-click="accept($index)"></i>
+                        <i class="icon-thumbs-down" ng-click="reject($index)"></i>
+                   -->
+                        {{sentence.toString()}}
+                   </div>
+                    <h2 ng-show="badSentences.length">
+                        Bad Sentences
+                    </h2>
+                    <div name="sentence" ng-repeat="sentence in badSentences">
+                   <!--
+                        <i class="icon-thumbs-up" ng-click="accept($index)"></i>
+                        <i class="icon-thumbs-down" ng-click="reject($index)"></i>
+                   -->
+                        {{sentence.toString()}}
+                   </div>
+                </div>
+            </tab>
+            <tab heading="Friends">
+                <div class="span12">
+                    <accordion close-others="true">
+                        <accordion-group ng-repeat="(breadth, type) in ngram.types">
+                            <accordion-heading>
+                                <div name="{{type}}">{{type}}</div>
+                            </accordion-heading>
+                            <ol name="{{breadth}}">
+                                <li name="{{breadth}}"
+                                    ng-repeat="(str, freq) in ngram.data(breadth)">
+                                    {{str}} - {{freq}}
+                                </li>
+                            </ol>
+                        </accordion-group>
+                    </accordion>
+                </div>
+            </tab>
+            <tab heading="Resources">
+                <div class="span12">
+                    <accordion close-others="true">
+                        <accordion-group ng-repeat="(breadth, type) in ngram.types">
+                            <accordion-heading>
+                                <div name="{{type}}">{{type}}</div>
+                            </accordion-heading>
+                            <ol name="{{breadth}}">
+                                <li name="{{breadth}}"
+                                    ng-repeat="(str, freq) in ngram.data(breadth)">
+                                    {{str}} - {{freq}}
+                                </li>
+                            </ol>
+                        </accordion-group>
+                    </accordion>
+                </div>
+            </tab>         </tabset>
+    </div>
+</div>

@@ -1,4 +1,5 @@
-gebo-client
-===========
+gebo-registrant-hai
+===================
 
-HAI for managing gebo-server accounts
+Human-agent interface for managing a gebo account
+
