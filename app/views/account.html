@@ -1,12 +1,39 @@
 <div class="container" ng_init="init()">
     <div class="row">
+        <p class="lead">
+            Name: {{agent.name}}<br />
+            Email: {{agent.email}}
+        </p>
+        <accordion close-others="false">
+            <accordion-group>
+                <accordion-heading name"testHeading">
+                    Friends ({{friends.length}})
+                </accordion-heading>
+                some crap
+            </accordion-group>
+        </accordion>
 <!--
+        <div class="panel-group" id="friendsAccordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <a href="#friendsCollapse" data-toggle="collapse" data-parent="friendsAccordion">
+                            Friends ({{friends.length}})
+                        </a>
+                    </div>
+                </div>
+                <div class="panel-collapse collapse" id="friendsCollapse">
+                    <div class="panel-body">
+                        Hello
+                    </div>
+                </div>
+            </div>
+        </div>
         <h2 ng-show="name">{{name}}
             <div class="btn" ng-click="save()">Save</div>
             <div class="btn" ng-click="startFresh()">Close</div>
         </h2>
         <br />
--->
         <tabset>
             <tab heading="You">
                 <div class="span11">
@@ -49,6 +76,7 @@
                         <i class="icon-thumbs-up" ng-click="accept($index)"></i>
                         <i class="icon-thumbs-down" ng-click="reject($index)"></i>
                    -->
+                   <!--
                         {{sentence.toString()}}
                    </div>
                     <h2 ng-show="badSentences.length">
@@ -59,6 +87,7 @@
                         <i class="icon-thumbs-up" ng-click="accept($index)"></i>
                         <i class="icon-thumbs-down" ng-click="reject($index)"></i>
                    -->
+                   <!--
                         {{sentence.toString()}}
                    </div>
                 </div>
@@ -100,3 +129,4 @@
          </tabset>
     </div>
 </div>
+-->
