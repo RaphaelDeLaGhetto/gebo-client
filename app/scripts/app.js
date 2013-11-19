@@ -20,6 +20,10 @@ angular.module('geboRegistrantHaiApp', ['ngRoute', 'gebo-client-token', 'ui.boot
         templateUrl: 'views/account.html',
         controller: 'AccountCtrl'
       }).
+      when('/friends', {
+        templateUrl: 'views/friends.html',
+        controller: 'FriendsCtrl'
+      }).
       otherwise({
         redirectTo: '/'
       });
