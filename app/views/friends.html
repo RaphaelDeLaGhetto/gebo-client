@@ -1,11 +1,63 @@
 <div class="container" ng_init="init()">
     <div class="row">
+        <p class="lead">
+            Total: {{friends.length}}
+        </p>
         <accordion close-others="false">
-            <accordion-group>
-                <accordion-heading name"testHeading">
-                    Friends ({{friends.length}})
+            <accordion-group ng-repeat="friend in friends">
+                <accordion-heading>
+                    {{friend.name}}
                 </accordion-heading>
-                some crap
+                Email: {{friend.email}}
+
+                <accordion close-others="false">
+                    <accordion-group>
+                        <accordion-heading>
+                            {{friend.name}}'s permissions
+                        </accordion-heading>
+                        <accordion close-others="false">
+                            <accordion-group ng-repeat="permission in friend.hisPermissions">
+                                <accordion-heading>
+                                    {{permission.email}}
+                                </accordion-heading>
+                                <div class="btn-group" data-toggle="buttons">
+                                    <label class="btn btn-primary">
+                                        <input type="checkbox">Read</input>
+                                    </label>
+                                    <label class="btn btn-primary">
+                                        <input type="checkbox">Write</input>
+                                    </label>
+                                    <label class="btn btn-primary">
+                                        <input type="checkbox">Execute</input>
+                                    </label>
+                                </div>
+                            </accordion-group>
+                        </accordion>
+                    </accordion-group>
+                    <accordion-group>
+                        <accordion-heading>
+                            My permissions
+                        </accordion-heading>
+                        <accordion close-others="false">
+                            <accordion-group ng-repeat="permission in friend.myPermissions">
+                                <accordion-heading>
+                                    {{permission.email}}
+                                </accordion-heading>
+                                <div class="btn-group" data-toggle="buttons">
+                                    <label class="btn btn-primary">
+                                        <input type="checkbox">Read</input>
+                                    </label>
+                                    <label class="btn btn-primary">
+                                        <input type="checkbox">Write</input>
+                                    </label>
+                                    <label class="btn btn-primary">
+                                        <input type="checkbox">Execute</input>
+                                    </label>
+                                </div>
+                            </accordion-group>
+                        </accordion>
+                    </accordion-group>
+                 </accordion>
             </accordion-group>
         </accordion>
 <!--

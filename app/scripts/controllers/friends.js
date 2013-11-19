@@ -13,7 +13,7 @@ angular.module('geboRegistrantHaiApp')
                 action: 'ls',
                 resource: 'friends',
                 recipient: Token.agent().email,
-                fields: ['name', '_id', 'email'],
+                fields: ['name', '_id', 'email', 'hisPermissions', 'myPermissions'],
           }).
         then(function(friends) {
             $scope.friends = friends;

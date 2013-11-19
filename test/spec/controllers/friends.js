@@ -52,7 +52,7 @@ describe('Controller: FriendsCtrl', function () {
                action: 'ls',
                resource: 'friends',
                recipient: token.agent.email,
-               fields: ['name', '_id', 'email'],
+               fields: ['name', '_id', 'email', 'hisPermissions', 'myPermissions'],
                access_token: ACCESS_TOKEN,
            }).respond([{ name: 'Dan', _id: '1', email: 'dan@email.com'},
                        { name:'Yanfen', _id: '2', email: 'yanfen@email.com' }]);
@@ -81,7 +81,7 @@ describe('Controller: FriendsCtrl', function () {
                     action: 'ls',
                     resource: 'friends',
                     recipient: token.agent.email,
-                    fields: ['name', '_id', 'email'],
+                    fields: ['name', '_id', 'email', 'hisPermissions', 'myPermissions'],
                     access_token: ACCESS_TOKEN });
 
             scope.init();
