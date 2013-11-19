@@ -23,6 +23,10 @@ describe('Controller: AccountCtrl', function () {
         token = $injector.get('Token');
         $httpBackend = $injector.get('$httpBackend');
 
+        /**
+         * Token
+         */
+
         // Set up token
         token.setEndpoints({
                 clientId: 'gebo-registrant-hai@capitolhill.ca',
@@ -32,7 +36,8 @@ describe('Controller: AccountCtrl', function () {
                 redirect: REDIRECT_URI,
               });
         token.set(ACCESS_TOKEN);
-        
+
+       
         // Get controller
         AccountCtrl = $controller('AccountCtrl', {
                 $scope: scope,
@@ -47,12 +52,24 @@ describe('Controller: AccountCtrl', function () {
         $httpBackend.whenPOST(GEBO_ADDRESS + '/request', {
                 action: 'ls',
                 resource: 'friends',
-//                recipient: 'my@address.com', 
+                recipient: scope.agent.email,
                 fields: ['name', '_id', 'email'],
                 access_token: ACCESS_TOKEN,
             }).respond([{ name: 'Dan', _id: '1', email: 'dan@email.com'},
                         { name:'Yanfen', _id: '2', email: 'yanfen@email.com' }]);
 
+        /**
+         * Spies
+         */
+        spyOn(token, 'data').andCallFake(function() {
+            return {
+                _id: '3',
+                name: 'John',
+                email: 'john@painter.com',
+                admin: false,
+            };
+
+        });
     }));
 
     afterEach(function() {
@@ -61,8 +78,29 @@ describe('Controller: AccountCtrl', function () {
     });
     
     it('should do something', function () {
-      expect(!!AccountCtrl).toBe(true);
-      expect(!!token).toBe(true);
+        expect(!!AccountCtrl).toBe(true);
+        expect(!!token).toBe(true);
+    });
+
+    /**
+     * onload
+     */
+    describe('onload', function() {
+
+        beforeEach(inject(function($controller) {
+            var ctrl = $controller('AccountCtrl', {
+                    $scope: scope,
+                    Token: token
+            });
+        }));
+
+        it('should set the agent data', function() {
+            expect(token.data).toHaveBeenCalled();
+            expect(scope.agent._id).toBe('3');
+            expect(scope.agent.name).toBe('John');
+            expect(scope.agent.email).toBe('john@painter.com');
+            expect(scope.agent.admin).toBe(false);
+        });
     });
 
     /**
@@ -78,7 +116,7 @@ describe('Controller: AccountCtrl', function () {
             $httpBackend.expectPOST(GEBO_ADDRESS + '/request', {
                     action: 'ls',
                     resource: 'friends',
-//                    recipient: 'my@address.com', 
+                    recipient: scope.agent.email,
                     fields: ['name', '_id', 'email'],
                     access_token: ACCESS_TOKEN });
 
