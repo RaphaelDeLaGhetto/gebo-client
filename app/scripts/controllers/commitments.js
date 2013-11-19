@@ -5,6 +5,8 @@ angular.module('geboRegistrantHaiApp')
 
     $scope.socialCommitments = [];
 
+    $scope.performatives = ['request', 'propose', 'inform']
+
     /**
      * init
      */
@@ -13,10 +15,10 @@ angular.module('geboRegistrantHaiApp')
                 action: 'ls',
                 resource: 'socialcommitments',
                 recipient: Token.agent().email,
-                fields: ['action', '_id', 'type', 'data', 'creditor', 'debtor', 'created', 'fulfilled'],
+                fields: ['created', 'action', '_id', 'type', 'data', 'creditor', 'debtor', 'fulfilled'],
           }).
         then(function(socialCommitments) {
-            $scope.socialCommitments = socialCommitments;
+            $scope.socialCommitments = socialCommitments.reverse();
           }).
         catch(function(err) {
             console.log(err);
