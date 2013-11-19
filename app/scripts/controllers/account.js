@@ -5,13 +5,12 @@ angular.module('geboRegistrantHaiApp')
 
     $scope.friends = [];
 
-    $scope.agent = Token.data();
+    $scope.agent = Token.agent();
 
     /**
      * init
      */
     $scope.init = function() {
-        console.log('AccountCtrl init');
         Token.request({
                 action: 'ls',
                 resource: 'friends',

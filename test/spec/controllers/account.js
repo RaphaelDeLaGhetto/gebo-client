@@ -61,7 +61,7 @@ describe('Controller: AccountCtrl', function () {
         /**
          * Spies
          */
-        spyOn(token, 'data').andCallFake(function() {
+        spyOn(token, 'agent').andCallFake(function() {
             return {
                 _id: '3',
                 name: 'John',
@@ -95,7 +95,7 @@ describe('Controller: AccountCtrl', function () {
         }));
 
         it('should set the agent data', function() {
-            expect(token.data).toHaveBeenCalled();
+            expect(token.agent).toHaveBeenCalled();
             expect(scope.agent._id).toBe('3');
             expect(scope.agent.name).toBe('John');
             expect(scope.agent.email).toBe('john@painter.com');
