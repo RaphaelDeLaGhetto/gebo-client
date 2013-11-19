@@ -39,7 +39,10 @@ describe('Controller: MainCtrl', function () {
             });
 
             $httpBackend = $injector.get('$httpBackend');
-            $httpBackend.when('GET', 'views/main.html').respond();
+        //    $httpBackend.when('GET', 'views/main.html').respond();
+
+            $httpBackend.whenGET(token.getEndpointUri('verify') +
+                    '?access_token=' + ACCESS_TOKEN).respond(VERIFICATION_DATA);
         });
 
         /**
