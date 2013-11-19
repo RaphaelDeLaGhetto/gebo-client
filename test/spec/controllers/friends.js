@@ -9,7 +9,6 @@ describe('Controller: FriendsCtrl', function () {
         REDIRECT_URI = 'https://myhost.com',
         ACCESS_TOKEN = '1234';
 
-
     // load the controller's module
     beforeEach(module('geboRegistrantHaiApp'));
 
@@ -74,7 +73,6 @@ describe('Controller: FriendsCtrl', function () {
      * init
      */
     describe('init', function() {
-
         it('should load a list of friends', function() {
             expect(scope.friends.length).toBe(0);
             $httpBackend.expectPOST(GEBO_ADDRESS + '/request', {
@@ -94,6 +92,51 @@ describe('Controller: FriendsCtrl', function () {
             expect(scope.friends[1]._id).toBe('2');
             expect(scope.friends[1].name).toBe('Yanfen');
             expect(scope.friends[1].email).toBe('yanfen@email.com');
+        });
+    });
+
+    /**
+     * grantAccess
+     */
+    describe('grantAccess', function() {
+
+        beforeEach(function() {
+            $httpBackend.whenPOST(GEBO_ADDRESS + '/request', {
+                    action: 'grantAccess',
+                    recipient: token.agent().email,
+                    friend: 'john@painter.com',
+                    permission: {
+                            email: 'some@app.com',
+                            read: true,
+                            write: true,
+                            execute: false,
+                        },
+                    access_token: ACCESS_TOKEN,
+                }).respond();
+        });
+
+        it('should send a request to the gebo', function() {
+
+            $httpBackend.expectPOST(GEBO_ADDRESS + '/request', {
+                    action: 'grantAccess',
+                    recipient: token.agent().email,
+                    friend: 'john@painter.com',
+                    permission: {
+                            email: 'some@app.com',
+                            read: true,
+                            write: true,
+                            execute: false,
+                        },
+                    access_token: ACCESS_TOKEN,
+                });
+
+            scope.grantAccess('john@painter.com', {
+                    email: 'some@app.com',
+                    read: true,
+                    write: true,
+                    execute: false});
+
+            $httpBackend.flush();
         });
     });
 });

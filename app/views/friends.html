@@ -20,16 +20,16 @@
                                 <accordion-heading>
                                     {{permission.email}}
                                 </accordion-heading>
-                                <div class="btn-group" data-toggle="buttons">
-                                    <label class="btn btn-primary">
-                                        <input type="checkbox">Read</input>
-                                    </label>
-                                    <label class="btn btn-primary">
-                                        <input type="checkbox">Write</input>
-                                    </label>
-                                    <label class="btn btn-primary">
-                                        <input type="checkbox">Execute</input>
-                                    </label>
+                                <div class="btn-group" ng-click="grantAccess(friend.email, permission)">
+                                    <button type="button" class="btn btn-primary" ng-model="permission.read" btn-checkbox>
+                                        Read
+                                    </button>
+                                    <button type="button" class="btn btn-primary" ng-model="permission.write" btn-checkbox>
+                                        Write
+                                    </button>
+                                    <button type="button" class="btn btn-primary" ng-model="permission.execute" btn-checkbox>
+                                        Execute
+                                    </button>
                                 </div>
                             </accordion-group>
                         </accordion>
