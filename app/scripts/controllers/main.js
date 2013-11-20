@@ -40,8 +40,6 @@ angular.module('geboRegistrantHaiApp')
      * Allow gebo-client access to the gebo user's resources
      */
     $scope.authenticate = function() {
-        console.log('authenticate');
-
         var extraParams = {};
         Token.getTokenByPopup(extraParams)
             .then(
