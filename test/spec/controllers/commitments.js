@@ -50,7 +50,7 @@ describe('Controller: CommitmentsCtrl', function () {
                action: 'ls',
                resource: 'socialcommitments',
                recipient: token.agent.email,
-               fields: ['created', 'action', '_id', 'type', 'data', 'creditor', 'debtor', 'fulfilled'],
+               fields: ['created', 'action', '_id', 'type', 'message', 'creditor', 'debtor', 'fulfilled'],
                access_token: ACCESS_TOKEN,
            }).respond([
                    { 
@@ -90,7 +90,7 @@ describe('Controller: CommitmentsCtrl', function () {
                     action: 'ls',
                     resource: 'socialcommitments',
                     recipient: token.agent.email,
-                    fields: ['created', 'action', '_id', 'type', 'data', 'creditor', 'debtor', 'fulfilled'],
+                    fields: ['created', 'action', '_id', 'type', 'message', 'creditor', 'debtor', 'fulfilled'],
                     access_token: ACCESS_TOKEN });
 
             scope.init();
