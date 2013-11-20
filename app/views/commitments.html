@@ -1,16 +1,21 @@
 <div class="container" ng_init="init()">
     <div class="row">
         <p class="lead">
-            Total: {{socialCommitments.length}}
+            Page: {{page}}
         </p>
+        <pager total-items="totalItems" page="page" align=false></pager>
         <accordion close-others="false">
             <accordion-group ng-repeat="sc in socialCommitments">
-                <accordion-heading ng-hide={{sc.fulfilled}}>
+                <accordion-heading>
                     {{sc.created}} {{sc.type }} {{sc.action}}
+                    <button class="btn btn-small" ng-click="agree(sc._id, $event)"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+                    <button class="btn btn-small" ng-click="refuse(sc._id, $event)"><span class="glyphicon glyphicon-thumbs-down"></span></button>
                 </accordion-heading>
                 Debtor: {{sc.debtor}}<br />
                 Creditor: {{sc.creditor}}<br />
-                Message: {{sc}}
+                Message: {{sc.message}}
             </accordion-group>
         </accordion>
+        <pager total-items="2000" page="page" align=false></pager>
+    </div>
 </div>
