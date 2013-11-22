@@ -139,4 +139,21 @@ describe('Controller: FriendsCtrl', function () {
             $httpBackend.flush();
         });
     });
+
+    /**
+     * friend
+     */
+    describe('friend', function() {
+
+        it('should send a friend request to the gebo specified', function() {
+            $httpBackend.expectPOST('https://foreigngebo.com/request', {
+                    action: 'friend',
+                    sender: token.agent().email,
+                    recipient: 'john@painter.com',
+                    access_token: ACCESS_TOKEN,
+                });
+
+
+        });
+    });
 });
