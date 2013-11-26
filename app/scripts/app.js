@@ -28,6 +28,10 @@ angular.module('geboRegistrantHaiApp', ['ngRoute', 'gebo-client-token', 'ui.boot
         templateUrl: 'views/commitments.html',
         controller: 'CommitmentsCtrl'
       }).
+      when('/conversations', {
+        templateUrl: 'views/conversations.html',
+        controller: 'ConversationsCtrl'
+      }).
       otherwise({
         redirectTo: '/'
       });
