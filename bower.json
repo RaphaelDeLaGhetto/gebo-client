@@ -8,7 +8,7 @@
     "angular-resource": "~1.2.1",
     "angular-sanitize": "~1.2.1",
     "angular-route": "~1.2.1",
-    "gebo-client-token": "~0.0.6",
+    "gebo-client-token": "~0.0.7",
     "angular-bootstrap": "~0.6.0",
     "bootstrap": "~3.0.2"
   },
