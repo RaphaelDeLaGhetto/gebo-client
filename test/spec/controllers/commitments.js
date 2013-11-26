@@ -1,6 +1,7 @@
 'use strict';
 
 describe('Controller: CommitmentsCtrl', function () {
+
     /**
      * Constants
      */
