@@ -12,13 +12,16 @@ angular.module('geboRegistrantHaiApp')
         Token.request({
                 action: 'ls',
                 resource: 'friends',
-                recipient: Token.agent().email,
+                receiver: Token.agent().email,
                 fields: ['name', '_id', 'email', 'hisPermissions', 'myPermissions'],
           }).
         then(function(friends) {
+            console.log('friends');
+            console.log(friends);
             $scope.friends = friends;
           }).
         catch(function(err) {
+            console.log('err');
             console.log(err);
           }); 
       };
@@ -32,7 +35,7 @@ angular.module('geboRegistrantHaiApp')
     $scope.grantAccess = function(friend, permission) {
         Token.request({
                 action: 'grantAccess',
-                recipient: Token.agent().email,
+                receiver: Token.agent().email,
                 friend: friend,
                 permission: permission,
           }).
