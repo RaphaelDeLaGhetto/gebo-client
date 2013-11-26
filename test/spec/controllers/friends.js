@@ -146,14 +146,18 @@ describe('Controller: FriendsCtrl', function () {
     describe('friend', function() {
 
         it('should send a friend request to the gebo specified', function() {
-            $httpBackend.expectPOST('https://foreigngebo.com/request', {
+            $httpBackend.expectPOST('https://mygebo.com/send', {
+                    performative: 'request',
                     action: 'friend',
                     sender: token.agent().email,
                     recipient: 'john@painter.com',
+                    gebo: 'https://foreigngebo.com',
                     access_token: ACCESS_TOKEN,
                 });
 
+            scope.friend('john@painter.com', 'https://foreigngebo.com');
 
+            $httpBackend.flush();
         });
     });
 });

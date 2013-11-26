@@ -42,4 +42,14 @@ angular.module('geboRegistrantHaiApp')
             console.log(err);
           });
       };
+
+    /**
+     * Send a friend request
+     *
+     * @param string
+     * @param string
+     */
+    $scope.friend = function(friendEmail, gebo) {
+       // Need a Token.send function here 
+      };
   });
