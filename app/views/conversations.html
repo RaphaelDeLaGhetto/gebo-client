@@ -1,86 +1,70 @@
 <div class="container" ng_init="init()">
     <div class="row">
         <p class="lead">
-            Make a new friend!
-            <div class="col-md-4">
-                <div class="input-group">
-                    <span class="input-group-addon">@</span>
-                    <input type="text" class="form-control" ng-model="friendEmail" placeholder="Email">
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="input-group">
-                    <span class="input-group-addon">https://</span>
-                    <input type="text" class="form-control" placeholder="gebo">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" ng-model="friendGebo" type="button">Send!</button>
-                    </span>
-                </div>
-            </div>
+            Page: {{page}}
         </p>
-    </div>
-    <div class="row">
-        <br />
-        <p class="lead">
-            Total: {{friends.length}}
-        </p>
-       <accordion close-others="false">
-            <accordion-group ng-repeat="friend in friends">
+        <pager total-items="totalItems" page="page" align=false></pager>
+
+        <accordion close-others="false">
+            <accordion-group ng-repeat="conversation in conversations">
                 <accordion-heading>
-                    {{friend.name}}
+                    {{conversation.role}} {{conversation.type}} {{conversation.created}}
                 </accordion-heading>
-                Email: {{friend.email}}
+                Commitments
 
                 <accordion close-others="false">
-                    <accordion-group>
+                    <accordion-group ng-repeat="sc in conversation.socialCommitments">
                         <accordion-heading>
-                            {{friend.name}}'s permissions
+                            {{sc.performative}}/{{sc.action}}
+                            <button class="btn btn-small" ng-click="agree(sc._id, $event)"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+                            <button class="btn btn-small" ng-click="refuse(sc._id, $event)"><span class="glyphicon glyphicon-thumbs-down"></span></button>
                         </accordion-heading>
-                        <accordion close-others="false">
-                            <accordion-group ng-repeat="permission in friend.hisPermissions">
-                                <accordion-heading>
-                                    {{permission.email}}
-                                </accordion-heading>
-                                <div class="btn-group" ng-click="grantAccess(friend.email, permission)">
-                                    <button type="button" class="btn btn-primary" ng-model="permission.read" btn-checkbox>
-                                        Read
-                                    </button>
-                                    <button type="button" class="btn btn-primary" ng-model="permission.write" btn-checkbox>
-                                        Write
-                                    </button>
-                                    <button type="button" class="btn btn-primary" ng-model="permission.execute" btn-checkbox>
-                                        Execute
-                                    </button>
-                                </div>
-                            </accordion-group>
-                        </accordion>
-                    </accordion-group>
-                    <accordion-group>
-                        <accordion-heading>
-                            My permissions
-                        </accordion-heading>
-                        <accordion close-others="false">
-                            <accordion-group ng-repeat="permission in friend.myPermissions">
-                                <accordion-heading>
-                                    {{permission.email}}
-                                </accordion-heading>
-                                <div class="btn-group" data-toggle="buttons">
-                                    <label class="btn btn-primary">
-                                        <input type="checkbox">Read</input>
-                                    </label>
-                                    <label class="btn btn-primary">
-                                        <input type="checkbox">Write</input>
-                                    </label>
-                                    <label class="btn btn-primary">
-                                        <input type="checkbox">Execute</input>
-                                    </label>
-                                </div>
-                            </accordion-group>
-                        </accordion>
+                        <div class="row">
+                            <span class="col-md-1">
+                                Creditor:
+                            </span>
+                            <span class="col-md-4">
+                                {{sc.creditor}}
+                            </span>
+                        </div>
+                        <div class="row">
+                            <span class="col-md-1">
+                                Debtor:
+                            </span>
+                            <span class="col-md-4">
+                                {{sc.debtor}}
+                            </span>
+                        </div>
+                        <div class="row">
+                            <span class="col-md-1">
+                                Created:
+                            </span>
+                            <span class="col-md-4">
+                                {{sc.created}}
+                            </span>
+                        </div>
+                        <div class="row">
+                            <span class="col-md-1">
+                                Fulfilled:
+                            </span>
+                            <span class="col-md-4">
+                                {{sc.fulfilled}}
+                            </span>
+                        </div>
+                        <div class="row">
+                            <span class="col-md-1">
+                                Message:
+                            </span>
+                            <span class="col-md-4">
+                                {{sc.message}}
+                            </span>
+                        </div>
                     </accordion-group>
                  </accordion>
             </accordion-group>
         </accordion>
+        
+        <pager total-items="totalItems" page="page" align=false></pager>
 <!--
         <div class="panel-group" id="friendsAccordion">
             <div class="panel panel-default">

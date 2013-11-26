@@ -53,11 +53,16 @@ angular.module('geboRegistrantHaiApp')
      * @param string
      */
     $scope.friend = function(friendEmail, gebo) {
+        console.log('friendEmail');
+        console.log(friendEmail);
+        console.log('gebo');
+        console.log(gebo);
+
         Token.send({ 
                 performative: 'request',
                 action: 'friend',
                 sender: Token.agent().email,
-                recipient: friendEmail,
+                receiver: friendEmail,
                 gebo: gebo,
           }).
         then(function() {

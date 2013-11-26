@@ -178,5 +178,5 @@ describe('Controller: ConversationsCtrl', function () {
         });
     });
 
-
 });
+

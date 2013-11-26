@@ -150,7 +150,7 @@ describe('Controller: FriendsCtrl', function () {
                     performative: 'request',
                     action: 'friend',
                     sender: token.agent().email,
-                    recipient: 'john@painter.com',
+                    receiver: 'john@painter.com',
                     gebo: 'https://foreigngebo.com',
                     access_token: ACCESS_TOKEN,
                 }).respond();

@@ -11,9 +11,9 @@
             <div class="col-md-4">
                 <div class="input-group">
                     <span class="input-group-addon">https://</span>
-                    <input type="text" class="form-control" placeholder="gebo">
+                    <input type="text" class="form-control" ng-model="friendGebo" placeholder="gebo">
                     <span class="input-group-btn">
-                        <button class="btn btn-default" ng-model="friendGebo" type="button">Send!</button>
+                        <button class="btn btn-default" ng-click="friend(friendEmail, friendGebo)" type="button">Send!</button>
                     </span>
                 </div>
             </div>
