@@ -30,7 +30,7 @@ angular.module('geboRegistrantHaiApp')
         Token.request({
                 action: 'ls',
                 resource: 'socialcommitments',
-                recipient: Token.agent().email,
+                receiver: Token.agent().email,
                 fields: ['created', 'action', '_id', 'type', 'message', 'creditor', 'debtor', 'fulfilled'],
                 criteria: { fulfilled: $scope.fulfilled },
                 options: { skip: _skip, limit: $scope.limit, sort: '-created' },
@@ -56,7 +56,7 @@ angular.module('geboRegistrantHaiApp')
         }
         Token.request({
                 action: 'agree',
-                recipient: Token.agent().email,
+                receiver: Token.agent().email,
                 socialCommitmentId: id,
           }).
         then(function(relevantData) {
@@ -81,7 +81,7 @@ angular.module('geboRegistrantHaiApp')
         }
         Token.request({
                 action: 'refuse',
-                recipient: Token.agent().email,
+                receiver: Token.agent().email,
                 socialCommitmentId: id,
           }).
         then(function(refusedCommitment) {
