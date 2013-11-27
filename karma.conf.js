@@ -13,6 +13,7 @@ files = [
   'app/components/angular-route/angular-route.js',
   'app/components/angular-bootstrap/ui-bootstrap-tpls.js',
   'app/components/gebo-client-token/dist/gebo-client-token.js',
+  'app/components/gebo-client-performatives/dist/gebo-client-performatives.js',
   'app/scripts/*.js',
   'app/scripts/**/*.js',
   'test/mock/**/*.js',

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('geboRegistrantHaiApp', ['ngRoute', 'gebo-client-token', 'ui.bootstrap'])
+angular.module('geboRegistrantHaiApp', ['ngRoute', 'gebo-client-token', 'ui.bootstrap', 'gebo-client-performatives'])
   .config(function ($routeProvider, $httpProvider) {
 
     // Enable CORS
