@@ -14,6 +14,7 @@ describe('Controller: FriendsCtrl', function () {
 
     var FriendsCtrl,
         token,
+        request,
         scope,
         $httpBackend;
 
@@ -21,6 +22,7 @@ describe('Controller: FriendsCtrl', function () {
     beforeEach(inject(function ($controller, $rootScope, $injector) {
         scope = $rootScope.$new();
         token = $injector.get('Token');
+        request = $injector.get('Request');
         $httpBackend = $injector.get('$httpBackend');
 
         /**
@@ -39,7 +41,8 @@ describe('Controller: FriendsCtrl', function () {
 
         FriendsCtrl = $controller('FriendsCtrl', {
                 $scope: scope,
-                Token: token
+                Token: token,
+                Request: request,
               });
    
        /**

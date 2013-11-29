@@ -1,14 +1,13 @@
 'use strict';
 
 angular.module('geboRegistrantHaiApp')
-  .controller('ConversationsCtrl', function ($scope, Token) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('ConversationsCtrl', function ($scope, Token, Request) {
 
     $scope.conversations = [];
+
+    $scope.request = Request;
+
+    $scope.email = Token.agent().email;
 
     /**
      * Paging stuff
@@ -36,7 +35,7 @@ angular.module('geboRegistrantHaiApp')
         Token.request({
                 action: 'ls',
                 resource: 'conversations',
-                receiver: Token.agent().email,
+                receiver: $scope.email,
                 fields: ['created', 'type', 'role', '_id', 'conversationId', 'socialCommitments'],
 //                criteria: { fulfilled: $scope.fulfilled },
                 options: { skip: _skip, limit: $scope.limit, sort: '-created' },
@@ -49,6 +48,8 @@ angular.module('geboRegistrantHaiApp')
           });
       };
 
-
+    $scope.agree = function(sc, evt) {
+        console.log('ConversationsCtrl agree');
+      };
 
   });

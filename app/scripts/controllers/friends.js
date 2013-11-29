@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('geboRegistrantHaiApp')
-  .controller('FriendsCtrl', function ($scope, Token) {
+  .controller('FriendsCtrl', function ($scope, Token, Request) {
 
     $scope.friends = [];
 

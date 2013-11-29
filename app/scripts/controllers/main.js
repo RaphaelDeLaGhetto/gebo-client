@@ -14,8 +14,8 @@ angular.module('geboRegistrantHaiApp')
     Token.setEndpoints({
       clientId: 'gebo-registrant-hai@capitolhill.ca',
       clientName: 'gebo-registrant-hai',
-//      gebo: 'https://192.168.1.241:3443',
-      gebo: 'https://localhost:3443',
+      gebo: 'https://192.168.1.25:3443',
+//      gebo: 'https://localhost:3443',
       localStorageName: 'gebo-registrant-hai-token',
       redirect: baseUrl + '/components/gebo-client-token/dist/oauth2callback.html',
     });
