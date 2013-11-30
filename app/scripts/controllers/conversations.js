@@ -48,8 +48,4 @@ angular.module('geboRegistrantHaiApp')
           });
       };
 
-    $scope.agree = function(sc, evt) {
-        console.log('ConversationsCtrl agree');
-      };
-
   });
