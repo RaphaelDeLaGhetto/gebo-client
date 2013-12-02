@@ -29,6 +29,24 @@ angular.module('geboRegistrantHaiApp')
       });
 
     /**
+     * Set Request message callback
+     *
+     * This function is called every time a
+     * new message is created.
+     */
+    Request.setCallback(function(message) {
+        Token.send(message).
+            then(function(data) {
+                console.log('message sent');
+                console.log(data); 
+              }).
+            catch(function(err) {
+                console.log('err');
+                console.log(err);
+              });
+      });
+
+    /**
      * ls
      */
     $scope.ls = function() {
