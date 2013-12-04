@@ -59,11 +59,16 @@ angular.module('geboRegistrantHaiApp')
         console.log(gebo);
 
         Token.send({ 
-                performative: 'request',
-                action: 'friend',
                 sender: Token.agent().email,
                 receiver: friendEmail,
+                performative: 'request',
+                action: 'friend',
                 gebo: gebo,
+                content: {
+                    name: Token.agent().name,
+                    email: Token.agent().email,
+                    uri: gebo,
+                },
           }).
         then(function() {
           }).

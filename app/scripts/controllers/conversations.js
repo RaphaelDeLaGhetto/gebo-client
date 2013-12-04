@@ -47,6 +47,26 @@ angular.module('geboRegistrantHaiApp')
       });
 
     /**
+     * Set Request perform callback
+     *
+     * This function is called every time a
+     * server agent wishes to perform a
+     * gebo-defined action
+     */
+    Request.setPerformCallback(function(message) {
+        console.log('message');
+        console.log(message);
+        Token.request(message).
+            then(function(response) {
+                console.log('response');
+                console.log(response);
+              }).
+            catch(function(err) {
+                console.log(err);
+              });
+      });
+
+    /**
      * ls
      */
     $scope.ls = function() {
