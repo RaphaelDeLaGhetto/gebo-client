@@ -51,15 +51,15 @@ describe('Controller: CommitmentsCtrl', function () {
                action: 'ls',
                resource: 'socialcommitments',
                recipient: token.agent.email,
-               fields: ['created', 'action', '_id', 'type', 'message', 'creditor', 'debtor', 'fulfilled'],
-               criteria: { fulfilled: null },
+               fields: ['created', 'action', '_id', 'performative', 'message', 'creditor', 'debtor', 'fulfilled'],
+//               criteria: { fulfilled: null },
                options: { skip: 0, limit: scope.limit, sort: '-created' },
                access_token: ACCESS_TOKEN,
            }).respond([
                    { 
                         _id: '1',
                         action: 'friend', 
-                        type: 'request',
+                        performative: 'request',
                         message: {
                             newFriend: {
                                     name: 'Dan',
@@ -75,8 +75,8 @@ describe('Controller: CommitmentsCtrl', function () {
                 action: 'ls',
                 resource: 'socialcommitments',
                 recipient: token.agent.email,
-                fields: ['created', 'action', '_id', 'type', 'message', 'creditor', 'debtor', 'fulfilled'],
-                criteria: { fulfilled: null },
+                fields: ['created', 'action', '_id', 'performative', 'message', 'creditor', 'debtor', 'fulfilled'],
+//                criteria: { fulfilled: null },
                 options: { skip: 0, limit: scope.limit, sort: '-created' },
                 access_token: ACCESS_TOKEN });
         $httpBackend.flush();
@@ -102,8 +102,8 @@ describe('Controller: CommitmentsCtrl', function () {
                     action: 'ls',
                     resource: 'socialcommitments',
                     recipient: token.agent.email,
-                    fields: ['created', 'action', '_id', 'type', 'message', 'creditor', 'debtor', 'fulfilled'],
-                    criteria: { fulfilled: null },
+                    fields: ['created', 'action', '_id', 'performative', 'message', 'creditor', 'debtor', 'fulfilled'],
+//                    criteria: { fulfilled: null },
                     options: { skip: 0, limit: scope.limit, sort: '-created' },
                     access_token: ACCESS_TOKEN });
 
@@ -115,7 +115,7 @@ describe('Controller: CommitmentsCtrl', function () {
             expect(scope.socialCommitments.length).toBe(1);
             expect(scope.socialCommitments[0]._id).toBe('1');
             expect(scope.socialCommitments[0].action).toBe('friend');
-            expect(scope.socialCommitments[0].type).toBe('request');
+            expect(scope.socialCommitments[0].performative).toBe('request');
             expect(scope.socialCommitments[0].message.newFriend.name).toBe('Dan');
             expect(scope.socialCommitments[0].message.newFriend.email).toBe('dan@email.com');
             expect(scope.socialCommitments[0].message.newFriend.uri).toBe('https://somegebo.com');
@@ -133,14 +133,14 @@ describe('Controller: CommitmentsCtrl', function () {
                     action: 'ls',
                     resource: 'socialcommitments',
                     recipient: token.agent.email,
-                    fields: ['created', 'action', '_id', 'type', 'message', 'creditor', 'debtor', 'fulfilled'],
-                    criteria: { fulfilled: null },
+                    fields: ['created', 'action', '_id', 'performative', 'message', 'creditor', 'debtor', 'fulfilled'],
+//                    criteria: { fulfilled: null },
                     options: { skip: 10, limit: scope.limit, sort: '-created' },
                     access_token: ACCESS_TOKEN }).
                 respond([{ 
                         _id: '11',
                         action: 'friend', 
-                        type: 'request',
+                        performative: 'request',
                         message: {
                             newFriend: {
                                     name: 'John',
@@ -176,7 +176,7 @@ describe('Controller: CommitmentsCtrl', function () {
                         _id: '1',
                         name: 'John', 
                         email: 'john@painter.com',
-                        type: 'request',
+                        performative: 'request',
                         hisCertificate: 'some other certificate',
                         uri: 'https://somegebo.com',
                    });
@@ -192,14 +192,14 @@ describe('Controller: CommitmentsCtrl', function () {
                     action: 'ls',
                     resource: 'socialcommitments',
                     recipient: token.agent.email,
-                    fields: ['created', 'action', '_id', 'type', 'message', 'creditor', 'debtor', 'fulfilled'],
-                    criteria: { fulfilled: null },
+                    fields: ['created', 'action', '_id', 'performative', 'message', 'creditor', 'debtor', 'fulfilled'],
+//                    criteria: { fulfilled: null },
                     options: { skip: scope.limit * (scope.page - 1), limit: scope.limit, sort: '-created' },
                     access_token: ACCESS_TOKEN }).
                 respond([{ 
                         _id: '11',
                         action: 'friend', 
-                        type: 'request',
+                        performative: 'request',
                         message: {
                             newFriend: {
                                     name: 'John',
@@ -228,7 +228,7 @@ describe('Controller: CommitmentsCtrl', function () {
                 respond({ 
                         _id: '11',
                         action: 'friend', 
-                        type: 'request',
+                        performative: 'request',
                         message: {
                             newFriend: {
                                     name: 'John',
@@ -251,14 +251,14 @@ describe('Controller: CommitmentsCtrl', function () {
                     action: 'ls',
                     resource: 'socialcommitments',
                     recipient: token.agent.email,
-                    fields: ['created', 'action', '_id', 'type', 'message', 'creditor', 'debtor', 'fulfilled'],
-                    criteria: { fulfilled: null },
+                    fields: ['created', 'action', '_id', 'performative', 'message', 'creditor', 'debtor', 'fulfilled'],
+//                    criteria: { fulfilled: null },
                     options: { skip: scope.limit * (scope.page - 1), limit: scope.limit, sort: '-created' },
                     access_token: ACCESS_TOKEN }).
                 respond([{ 
                         _id: '11',
                         action: 'friend', 
-                        type: 'request',
+                        performative: 'request',
                         message: {
                             newFriend: {
                                     name: 'John',

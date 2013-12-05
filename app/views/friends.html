@@ -5,15 +5,21 @@
             <div class="col-md-4">
                 <div class="input-group">
                     <span class="input-group-addon">@</span>
-                    <input type="text" class="form-control" ng-model="friendEmail" placeholder="Email">
+                    <input type="text" class="form-control" ng-model="receiver" placeholder="Email">
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="input-group">
                     <span class="input-group-addon">https://</span>
-                    <input type="text" class="form-control" ng-model="friendGebo" placeholder="gebo">
+                    <input type="text" class="form-control" ng-model="gebo" placeholder="gebo">
                     <span class="input-group-btn">
-                        <button class="btn btn-default" ng-click="friend(friendEmail, friendGebo)" type="button">Send!</button>
+                        <request-control
+                            sender="{{sender}}"
+                            receiver="{{receiver}}"
+                            action="friend"
+                            gebo="{{gebo}}"
+                            ng-click="friend()">
+                        </request-control>
                     </span>
                 </div>
             </div>
@@ -81,6 +87,8 @@
                  </accordion>
             </accordion-group>
         </accordion>
+    </div>
+</div>
 <!--
         <div class="panel-group" id="friendsAccordion">
             <div class="panel panel-default">

@@ -5,6 +5,12 @@ angular.module('geboRegistrantHaiApp')
 
     $scope.friends = [];
 
+    // Friending variables
+    $scope.sender = Token.agent().email;
+    $scope.receiver = null;
+    $scope.action = null;
+    $scope.gebo = null;
+
     /**
      * init
      */
@@ -48,32 +54,36 @@ angular.module('geboRegistrantHaiApp')
 
     /**
      * Send a friend request
-     *
-     * @param string
-     * @param string
      */
-    $scope.friend = function(friendEmail, gebo) {
-        console.log('friendEmail');
-        console.log(friendEmail);
-        console.log('gebo');
-        console.log(gebo);
+    $scope.friend = function() {
 
-        Token.send({ 
-                sender: Token.agent().email,
-                receiver: friendEmail,
-                performative: 'request',
-                action: 'friend',
-                gebo: gebo,
+        var message = {
+                receiver: Token.agent().email,
+                action: 'certificate',
                 content: {
-                    name: Token.agent().name,
-                    email: Token.agent().email,
-                    uri: gebo,
+                    agent: $scope.receiver,
                 },
-          }).
-        then(function() {
-          }).
-        catch(function(err) {
-            console.log(err);
-          });
+            };
+
+        Token.request(message).
+            then(function(certificate) {
+                var content = {
+                        name: Token.agent().name,
+                        email: Token.agent().email,
+                        gebo: $scope.gebo,
+                        certificate: certificate,
+                    };
+
+                var message = Request.make($scope.sender, $scope.receiver, $scope.action, $scope.gebo, content);
+                Token.send(message).
+                    then(function() {
+                      }).
+                    catch(function(err) {
+                        console.log(err);
+                      });
+              }).
+            catch(function(err) {
+                console.log(err);
+              });
       };
   });
