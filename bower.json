@@ -9,7 +9,7 @@
     "angular-sanitize": "~1.2.3",
     "angular-route": "~1.2.3",
     "gebo-client-token": "~0.0.7",
-    "gebo-client-performatives": "~0.0.15",
+    "gebo-client-performatives": "~0.0.17",
     "angular-bootstrap": "~0.6.0",
     "bootstrap": "~3.0.2"
   },
