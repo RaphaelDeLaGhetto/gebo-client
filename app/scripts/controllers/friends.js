@@ -16,10 +16,12 @@ angular.module('geboRegistrantHaiApp')
      */
     $scope.init = function() {
         Token.perform({
-                action: 'ls',
-                resource: 'friends',
                 receiver: Token.agent().email,
-                fields: ['name', '_id', 'email', 'hisPermissions', 'myPermissions'],
+                action: 'ls',
+                content: {
+                    resource: 'friends',
+                    fields: ['name', '_id', 'email', 'hisPermissions', 'myPermissions'],
+                }
           }).
         then(function(friends) {
             console.log('friends');

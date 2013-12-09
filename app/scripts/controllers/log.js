@@ -29,11 +29,13 @@ angular.module('geboRegistrantHaiApp')
     $scope.ls = function() {
         Token.perform({
                 action: 'ls',
-                resource: 'socialcommitments',
                 receiver: Token.agent().email,
-                fields: ['created', 'action', '_id', 'performative', 'message', 'creditor', 'debtor', 'fulfilled'],
-//                criteria: { fulfilled: $scope.fulfilled },
-                options: { skip: _skip, limit: $scope.limit, sort: '-created' },
+                content: {
+                    resource: 'socialcommitments',
+                    fields: ['created', 'action', '_id', 'performative', 'message', 'creditor', 'debtor', 'fulfilled'],
+    //                criteria: { fulfilled: $scope.fulfilled },
+                    options: { skip: _skip, limit: $scope.limit, sort: '-created' },
+                }
           }).
         then(function(socialCommitments) {
             $scope.socialCommitments = socialCommitments;

@@ -48,7 +48,7 @@ describe('Controller: FriendsCtrl', function () {
         /**
          * Spies
          */
-        spyOn(token, 'agent').andCallFake(function(key) {
+        spyOn(token, 'agent').andCallFake(function() {
                 return {
                         name: 'Dan',
                         email: 'dan@example.com',    
@@ -60,10 +60,12 @@ describe('Controller: FriendsCtrl', function () {
 
         // Get a list of friends
         $httpBackend.whenPOST(GEBO_ADDRESS + '/perform', {
-                action: 'ls',
-                resource: 'friends',
                 receiver: token.agent().email,
-                fields: ['name', '_id', 'email', 'hisPermissions', 'myPermissions'],
+                action: 'ls',
+                content: {
+                    resource: 'friends',
+                    fields: ['name', '_id', 'email', 'hisPermissions', 'myPermissions'],
+                },
                 access_token: ACCESS_TOKEN,
               }).respond([{ name: 'Dan', _id: '1', email: 'dan@email.com'},
                           { name:'Yanfen', _id: '2', email: 'yanfen@email.com' }]);
@@ -88,10 +90,12 @@ describe('Controller: FriendsCtrl', function () {
         it('should load a list of friends', function() {
             expect(scope.friends.length).toBe(0);
             $httpBackend.expectPOST(GEBO_ADDRESS + '/perform', {
-                    action: 'ls',
-                    resource: 'friends',
                     receiver: token.agent().email,
-                    fields: ['name', '_id', 'email', 'hisPermissions', 'myPermissions'],
+                    action: 'ls',
+                    content: {
+                        resource: 'friends',
+                        fields: ['name', '_id', 'email', 'hisPermissions', 'myPermissions'],
+                    },
                     access_token: ACCESS_TOKEN });
 
             scope.init();

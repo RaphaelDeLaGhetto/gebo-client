@@ -41,7 +41,16 @@ describe('Controller: LogCtrl', function () {
                 $scope: scope,
                 Token: token
               });
-   
+
+        /**
+         * Spies
+         */
+        spyOn(token, 'agent').andCallFake(function() {
+                return {
+                        name: 'Dan',
+                        email: 'dan@example.com',    
+                    };
+              });  
        /**
         * $httpBackend
         */
@@ -49,11 +58,13 @@ describe('Controller: LogCtrl', function () {
        // Get a list of social commitments
        $httpBackend.whenPOST(GEBO_ADDRESS + '/perform', {
                action: 'ls',
-               resource: 'socialcommitments',
-               recipient: token.agent.email,
-               fields: ['created', 'action', '_id', 'performative', 'message', 'creditor', 'debtor', 'fulfilled'],
-//               criteria: { fulfilled: null },
-               options: { skip: 0, limit: scope.limit, sort: '-created' },
+               receiver: token.agent().email,
+               content: {
+                    resource: 'socialcommitments',
+                    fields: ['created', 'action', '_id', 'performative', 'message', 'creditor', 'debtor', 'fulfilled'],
+     //               criteria: { fulfilled: null },
+                    options: { skip: 0, limit: scope.limit, sort: '-created' },
+               },
                access_token: ACCESS_TOKEN,
            }).respond([
                    { 
@@ -73,12 +84,15 @@ describe('Controller: LogCtrl', function () {
         // When the page is loaded, the $watch:page event gets fired
         $httpBackend.expectPOST(GEBO_ADDRESS + '/perform', {
                 action: 'ls',
-                resource: 'socialcommitments',
-                recipient: token.agent.email,
-                fields: ['created', 'action', '_id', 'performative', 'message', 'creditor', 'debtor', 'fulfilled'],
-//                criteria: { fulfilled: null },
-                options: { skip: 0, limit: scope.limit, sort: '-created' },
+                receiver: token.agent().email,
+                content: {
+                    resource: 'socialcommitments',
+                    fields: ['created', 'action', '_id', 'performative', 'message', 'creditor', 'debtor', 'fulfilled'],
+    //                criteria: { fulfilled: null },
+                    options: { skip: 0, limit: scope.limit, sort: '-created' },
+                },
                 access_token: ACCESS_TOKEN });
+
         $httpBackend.flush();
     }));
 
@@ -100,11 +114,13 @@ describe('Controller: LogCtrl', function () {
         it('should ask for the appropriate range of social commitments', function() {
             $httpBackend.expectPOST(GEBO_ADDRESS + '/perform', {
                     action: 'ls',
-                    resource: 'socialcommitments',
-                    recipient: token.agent.email,
-                    fields: ['created', 'action', '_id', 'performative', 'message', 'creditor', 'debtor', 'fulfilled'],
+                    receiver: token.agent().email,
+                    content: {
+                        resource: 'socialcommitments',
+                        fields: ['created', 'action', '_id', 'performative', 'message', 'creditor', 'debtor', 'fulfilled'],
 //                    criteria: { fulfilled: null },
-                    options: { skip: 0, limit: scope.limit, sort: '-created' },
+                        options: { skip: 0, limit: scope.limit, sort: '-created' },
+                    },
                     access_token: ACCESS_TOKEN });
 
             scope.socialCommitments = [];
@@ -131,11 +147,13 @@ describe('Controller: LogCtrl', function () {
         it('should load new social commitments when it changes', function() {
             $httpBackend.expectPOST(GEBO_ADDRESS + '/perform', {
                     action: 'ls',
-                    resource: 'socialcommitments',
-                    recipient: token.agent.email,
-                    fields: ['created', 'action', '_id', 'performative', 'message', 'creditor', 'debtor', 'fulfilled'],
-//                    criteria: { fulfilled: null },
-                    options: { skip: 10, limit: scope.limit, sort: '-created' },
+                    receiver: token.agent().email,
+                    content: {
+                        resource: 'socialcommitments',
+                        fields: ['created', 'action', '_id', 'performative', 'message', 'creditor', 'debtor', 'fulfilled'],
+    //                    criteria: { fulfilled: null },
+                        options: { skip: 10, limit: scope.limit, sort: '-created' },
+                    },
                     access_token: ACCESS_TOKEN }).
                 respond([{ 
                         _id: '11',
