@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: CommitmentsCtrl', function () {
+describe('Controller: LogCtrl', function () {
 
     /**
      * Constants
@@ -12,7 +12,7 @@ describe('Controller: CommitmentsCtrl', function () {
     // load the controller's module
     beforeEach(module('geboRegistrantHaiApp'));
 
-    var CommitmentsCtrl,
+    var LogCtrl,
         token,
         scope,
         $httpBackend;
@@ -37,7 +37,7 @@ describe('Controller: CommitmentsCtrl', function () {
               });
         token.set(ACCESS_TOKEN);
 
-        CommitmentsCtrl = $controller('CommitmentsCtrl', {
+        LogCtrl = $controller('LogCtrl', {
                 $scope: scope,
                 Token: token
               });
@@ -88,7 +88,7 @@ describe('Controller: CommitmentsCtrl', function () {
     });
     
     it('should do something', function () {
-        expect(!!CommitmentsCtrl).toBe(true);
+        expect(!!LogCtrl).toBe(true);
         expect(!!token).toBe(true);
     });
 

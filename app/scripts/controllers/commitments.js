@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('geboRegistrantHaiApp')
-  .controller('CommitmentsCtrl', function ($scope, Token) {
+  .controller('LogCtrl', function ($scope, Token) {
 
     $scope.socialCommitments = [];
 

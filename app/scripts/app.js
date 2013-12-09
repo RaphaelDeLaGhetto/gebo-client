@@ -24,9 +24,9 @@ angular.module('geboRegistrantHaiApp', ['ngRoute', 'gebo-client-token', 'ui.boot
         templateUrl: 'views/friends.html',
         controller: 'FriendsCtrl'
       }).
-      when('/commitments', {
-        templateUrl: 'views/commitments.html',
-        controller: 'CommitmentsCtrl'
+      when('/log', {
+        templateUrl: 'views/log.html',
+        controller: 'LogCtrl'
       }).
       when('/conversations', {
         templateUrl: 'views/conversations.html',
