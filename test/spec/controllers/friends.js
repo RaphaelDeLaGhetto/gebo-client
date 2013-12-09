@@ -45,19 +45,28 @@ describe('Controller: FriendsCtrl', function () {
                 Request: request,
               });
    
-       /**
-        * $httpBackend
-        */
+        /**
+         * Spies
+         */
+        spyOn(token, 'agent').andCallFake(function(key) {
+                return {
+                        name: 'Dan',
+                        email: 'dan@example.com',    
+                    };
+              });
+        /**
+         * $httpBackend
+         */
 
-       // Get a list of friends
-       $httpBackend.whenPOST(GEBO_ADDRESS + '/request', {
-               action: 'ls',
-               resource: 'friends',
-               recipient: token.agent.email,
-               fields: ['name', '_id', 'email', 'hisPermissions', 'myPermissions'],
-               access_token: ACCESS_TOKEN,
-           }).respond([{ name: 'Dan', _id: '1', email: 'dan@email.com'},
-                       { name:'Yanfen', _id: '2', email: 'yanfen@email.com' }]);
+        // Get a list of friends
+        $httpBackend.whenPOST(GEBO_ADDRESS + '/perform', {
+                action: 'ls',
+                resource: 'friends',
+                receiver: token.agent().email,
+                fields: ['name', '_id', 'email', 'hisPermissions', 'myPermissions'],
+                access_token: ACCESS_TOKEN,
+              }).respond([{ name: 'Dan', _id: '1', email: 'dan@email.com'},
+                          { name:'Yanfen', _id: '2', email: 'yanfen@email.com' }]);
 
 
     }));
@@ -78,10 +87,10 @@ describe('Controller: FriendsCtrl', function () {
     describe('init', function() {
         it('should load a list of friends', function() {
             expect(scope.friends.length).toBe(0);
-            $httpBackend.expectPOST(GEBO_ADDRESS + '/request', {
+            $httpBackend.expectPOST(GEBO_ADDRESS + '/perform', {
                     action: 'ls',
                     resource: 'friends',
-                    recipient: token.agent.email,
+                    receiver: token.agent().email,
                     fields: ['name', '_id', 'email', 'hisPermissions', 'myPermissions'],
                     access_token: ACCESS_TOKEN });
 
@@ -104,9 +113,9 @@ describe('Controller: FriendsCtrl', function () {
     describe('grantAccess', function() {
 
         beforeEach(function() {
-            $httpBackend.whenPOST(GEBO_ADDRESS + '/request', {
+            $httpBackend.whenPOST(GEBO_ADDRESS + '/perform', {
                     action: 'grantAccess',
-                    recipient: token.agent().email,
+                    receiver: token.agent().email,
                     friend: 'john@painter.com',
                     permission: {
                             email: 'some@app.com',
@@ -118,11 +127,11 @@ describe('Controller: FriendsCtrl', function () {
                 }).respond();
         });
 
-        it('should send a request to the gebo', function() {
+        it('should attempt to perform the grantAccess action on the gebo', function() {
 
-            $httpBackend.expectPOST(GEBO_ADDRESS + '/request', {
+            $httpBackend.expectPOST(GEBO_ADDRESS + '/perform', {
                     action: 'grantAccess',
-                    recipient: token.agent().email,
+                    receiver: token.agent().email,
                     friend: 'john@painter.com',
                     permission: {
                             email: 'some@app.com',
@@ -149,16 +158,35 @@ describe('Controller: FriendsCtrl', function () {
     describe('friend', function() {
 
         it('should send a friend request to the gebo specified', function() {
+            $httpBackend.expectPOST(GEBO_ADDRESS + '/perform', {
+                    receiver: token.agent().email,
+                    action: 'certificate',
+                    content: {
+                            agent: 'john@painter.com', 
+                        },
+                    access_token: ACCESS_TOKEN,
+                }).respond('some certificate');
+
             $httpBackend.expectPOST(GEBO_ADDRESS + '/send', {
+                    sender: 'dan@example.com',
+                    receiver: 'john@painter.com',
                     performative: 'request',
                     action: 'friend',
-                    sender: token.agent().email,
-                    receiver: 'john@painter.com',
                     gebo: 'https://foreigngebo.com',
+                    content: {
+                        name: token.agent().name,
+                        email: token.agent().email,
+                        gebo: GEBO_ADDRESS,
+                        certificate: 'some certificate',
+                    },
                     access_token: ACCESS_TOKEN,
                 }).respond();
 
-            scope.friend('john@painter.com', 'https://foreigngebo.com');
+            scope.sender = 'dan@example.com';
+            scope.receiver = 'john@painter.com'; 
+            scope.action = 'friend';
+            scope.gebo = 'https://foreigngebo.com';
+            scope.friend();
 
             $httpBackend.flush();
         });

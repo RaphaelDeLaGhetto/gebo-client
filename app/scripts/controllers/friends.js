@@ -15,7 +15,7 @@ angular.module('geboRegistrantHaiApp')
      * init
      */
     $scope.init = function() {
-        Token.request({
+        Token.perform({
                 action: 'ls',
                 resource: 'friends',
                 receiver: Token.agent().email,
@@ -39,7 +39,7 @@ angular.module('geboRegistrantHaiApp')
      * @param Object
      */
     $scope.grantAccess = function(friend, permission) {
-        Token.request({
+        Token.perform({
                 action: 'grantAccess',
                 receiver: Token.agent().email,
                 friend: friend,
@@ -65,12 +65,12 @@ angular.module('geboRegistrantHaiApp')
                 },
             };
 
-        Token.request(message).
+        Token.perform(message).
             then(function(certificate) {
                 var content = {
                         name: Token.agent().name,
                         email: Token.agent().email,
-                        gebo: $scope.gebo,
+                        gebo: Token.getEndpoints().gebo,
                         certificate: certificate,
                     };
 
