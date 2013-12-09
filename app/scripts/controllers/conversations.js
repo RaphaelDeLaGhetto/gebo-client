@@ -56,7 +56,7 @@ angular.module('geboRegistrantHaiApp')
     Request.setPerformCallback(function(message) {
         console.log('message');
         console.log(message);
-        Token.request(message).
+        Token.perform(message).
             then(function(response) {
                 console.log('response');
                 console.log(response);
@@ -70,7 +70,7 @@ angular.module('geboRegistrantHaiApp')
      * ls
      */
     $scope.ls = function() {
-        Token.request({
+        Token.perform({
                 action: 'ls',
                 resource: 'conversations',
                 receiver: $scope.email,

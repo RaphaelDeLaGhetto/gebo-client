@@ -49,8 +49,8 @@ describe('Controller: ConversationsCtrl', function () {
         * $httpBackend
         */
 
-       // Get a list of social commitments
-       $httpBackend.whenPOST(GEBO_ADDRESS + '/request', {
+       // Get a list of conversations
+       $httpBackend.whenPOST(GEBO_ADDRESS + '/perform', {
                action: 'ls',
                resource: 'conversations',
                recipient: token.agent().email,
@@ -79,7 +79,7 @@ describe('Controller: ConversationsCtrl', function () {
                    }]);
 
         // When the page is loaded, the $watch:page event gets fired
-        $httpBackend.expectPOST(GEBO_ADDRESS + '/request', {
+        $httpBackend.expectPOST(GEBO_ADDRESS + '/perform', {
                 action: 'ls',
                 resource: 'conversations',
                 recipient: token.agent().email,
@@ -105,8 +105,8 @@ describe('Controller: ConversationsCtrl', function () {
      */
     describe('ls', function() {
 
-        it('should request the appropriate range of conversations', function() {
-            $httpBackend.expectPOST(GEBO_ADDRESS + '/request', {
+        it('should ask for the appropriate range of conversations', function() {
+            $httpBackend.expectPOST(GEBO_ADDRESS + '/perform', {
                 action: 'ls',
                 resource: 'conversations',
                 recipient: token.agent().email,
@@ -143,7 +143,7 @@ describe('Controller: ConversationsCtrl', function () {
     describe('$watch: page', function() {
 
         it('should load new conversations when it changes', function() {
-            $httpBackend.expectPOST(GEBO_ADDRESS + '/request', {
+            $httpBackend.expectPOST(GEBO_ADDRESS + '/perform', {
                     action: 'ls',
                     resource: 'conversations',
                     recipient: token.agent().email,
