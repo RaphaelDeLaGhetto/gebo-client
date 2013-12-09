@@ -8,10 +8,6 @@
             <accordion-group ng-repeat="sc in socialCommitments">
                 <accordion-heading>
                     {{sc.created}} {{sc.performative}} {{sc.action}}
-                    <!--
-                    <button class="btn btn-small" ng-click="agree(sc._id, $event)"><span class="glyphicon glyphicon-thumbs-up"></span></button>
-                    <button class="btn btn-small" ng-click="refuse(sc._id, $event)"><span class="glyphicon glyphicon-thumbs-down"></span></button>
-                    -->
                 </accordion-heading>
                 Debtor: {{sc.debtor}}<br />
                 Creditor: {{sc.creditor}}<br />

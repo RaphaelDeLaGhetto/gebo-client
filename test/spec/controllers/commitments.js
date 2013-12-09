@@ -47,7 +47,7 @@ describe('Controller: CommitmentsCtrl', function () {
         */
 
        // Get a list of social commitments
-       $httpBackend.whenPOST(GEBO_ADDRESS + '/request', {
+       $httpBackend.whenPOST(GEBO_ADDRESS + '/perform', {
                action: 'ls',
                resource: 'socialcommitments',
                recipient: token.agent.email,
@@ -71,7 +71,7 @@ describe('Controller: CommitmentsCtrl', function () {
                    }]);
 
         // When the page is loaded, the $watch:page event gets fired
-        $httpBackend.expectPOST(GEBO_ADDRESS + '/request', {
+        $httpBackend.expectPOST(GEBO_ADDRESS + '/perform', {
                 action: 'ls',
                 resource: 'socialcommitments',
                 recipient: token.agent.email,
@@ -97,8 +97,8 @@ describe('Controller: CommitmentsCtrl', function () {
      */
     describe('ls', function() {
 
-        it('should request the appropriate range of social commitments', function() {
-            $httpBackend.expectPOST(GEBO_ADDRESS + '/request', {
+        it('should ask for the appropriate range of social commitments', function() {
+            $httpBackend.expectPOST(GEBO_ADDRESS + '/perform', {
                     action: 'ls',
                     resource: 'socialcommitments',
                     recipient: token.agent.email,
@@ -129,7 +129,7 @@ describe('Controller: CommitmentsCtrl', function () {
     describe('$watch: page', function() {
 
         it('should load new social commitments when it changes', function() {
-            $httpBackend.expectPOST(GEBO_ADDRESS + '/request', {
+            $httpBackend.expectPOST(GEBO_ADDRESS + '/perform', {
                     action: 'ls',
                     resource: 'socialcommitments',
                     recipient: token.agent.email,
@@ -161,116 +161,4 @@ describe('Controller: CommitmentsCtrl', function () {
         });
     });
 
-    /**
-     * agree
-     */
-    describe('agree', function() {
-
-        beforeEach(function() {
-            $httpBackend.expectPOST(GEBO_ADDRESS + '/request', {
-                    action: 'agree',
-                    recipient: token.agent.email,
-                    socialCommitmentId: '123',
-                    access_token: ACCESS_TOKEN }).
-                respond({ 
-                        _id: '1',
-                        name: 'John', 
-                        email: 'john@painter.com',
-                        performative: 'request',
-                        hisCertificate: 'some other certificate',
-                        uri: 'https://somegebo.com',
-                   });
-        });
-
-        it('should post an agree request to the gebo', function() {
-            scope.agree('123');
-            $httpBackend.flush();
-        });
-
-        it('should post an request to the gebo once agreed', function() {
-            $httpBackend.expectPOST(GEBO_ADDRESS + '/request', {
-                    action: 'ls',
-                    resource: 'socialcommitments',
-                    recipient: token.agent.email,
-                    fields: ['created', 'action', '_id', 'performative', 'message', 'creditor', 'debtor', 'fulfilled'],
-//                    criteria: { fulfilled: null },
-                    options: { skip: scope.limit * (scope.page - 1), limit: scope.limit, sort: '-created' },
-                    access_token: ACCESS_TOKEN }).
-                respond([{ 
-                        _id: '11',
-                        action: 'friend', 
-                        performative: 'request',
-                        message: {
-                            newFriend: {
-                                    name: 'John',
-                                    email: 'john@epainter.com',
-                                    uri: 'https://somegebo.com',
-                                    hisCertificate: 'some other certificate',
-                            },
-                        }
-                   }]);
-
-            scope.agree('123');
-            $httpBackend.flush();
-        });
-    });
-
-    /**
-     * refuse
-     */
-    describe('refuse', function() {
-        beforeEach(function() {
-            $httpBackend.expectPOST(GEBO_ADDRESS + '/request', {
-                    action: 'refuse',
-                    recipient: token.agent.email,
-                    socialCommitmentId: '123',
-                    access_token: ACCESS_TOKEN }).
-                respond({ 
-                        _id: '11',
-                        action: 'friend', 
-                        performative: 'request',
-                        message: {
-                            newFriend: {
-                                    name: 'John',
-                                    email: 'john@epainter.com',
-                                    uri: 'https://somegebo.com',
-                                    hisCertificate: 'some other certificate',
-                            },
-                        },
-                        fulfilled: Date.now(),
-                   });
-        });
-
-        it('should post a refuse request to the gebo', function() {
-            scope.refuse('123');
-            $httpBackend.flush();
-        });
-
-        it('should post an request to the gebo once refused', function() {
-            $httpBackend.expectPOST(GEBO_ADDRESS + '/request', {
-                    action: 'ls',
-                    resource: 'socialcommitments',
-                    recipient: token.agent.email,
-                    fields: ['created', 'action', '_id', 'performative', 'message', 'creditor', 'debtor', 'fulfilled'],
-//                    criteria: { fulfilled: null },
-                    options: { skip: scope.limit * (scope.page - 1), limit: scope.limit, sort: '-created' },
-                    access_token: ACCESS_TOKEN }).
-                respond([{ 
-                        _id: '11',
-                        action: 'friend', 
-                        performative: 'request',
-                        message: {
-                            newFriend: {
-                                    name: 'John',
-                                    email: 'john@epainter.com',
-                                    uri: 'https://somegebo.com',
-                                    hisCertificate: 'some other certificate',
-                            },
-                        }
-                   }]);
-
-            scope.refuse('123');
-            $httpBackend.flush();
-        });
-    });
 });

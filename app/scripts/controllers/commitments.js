@@ -27,7 +27,7 @@ angular.module('geboRegistrantHaiApp')
      * ls
      */
     $scope.ls = function() {
-        Token.request({
+        Token.perform({
                 action: 'ls',
                 resource: 'socialcommitments',
                 receiver: Token.agent().email,
@@ -43,53 +43,4 @@ angular.module('geboRegistrantHaiApp')
           });
       };
 
-    /**
-     * agree
-     *
-     * @param string
-     * @param event
-     */
-    $scope.agree = function(id, e) {
-        if (e) {
-          e.preventDefault();
-          e.stopPropagation();
-        }
-        Token.request({
-                action: 'agree',
-                receiver: Token.agent().email,
-                socialCommitmentId: id,
-          }).
-        then(function(relevantData) {
-            $scope.ls();
-          }).
-        catch(function(err) {
-            console.log(err);
-          });
-
-      };
-
-    /**
-     * refuse
-     *
-     * @param string
-     * @param event
-     */
-    $scope.refuse = function(id, e) {
-        if (e) {
-          e.preventDefault();
-          e.stopPropagation();
-        }
-        Token.request({
-                action: 'refuse',
-                receiver: Token.agent().email,
-                socialCommitmentId: id,
-          }).
-        then(function(refusedCommitment) {
-            $scope.ls();
-          }).
-        catch(function(err) {
-            console.log(err);
-          });
-
-      };
   });
