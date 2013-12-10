@@ -34,7 +34,7 @@ angular.module('geboRegistrantHaiApp')
                     resource: 'socialcommitments',
                     fields: ['created', 'action', '_id', 'performative', 'message', 'creditor', 'debtor', 'fulfilled'],
     //                criteria: { fulfilled: $scope.fulfilled },
-                    options: { skip: _skip, limit: $scope.limit, sort: '-created' },
+                    options: { skip: _skip, limit: $scope.limit, sort: [['created', 'descending']] },
                 }
           }).
         then(function(socialCommitments) {

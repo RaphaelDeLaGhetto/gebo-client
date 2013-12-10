@@ -63,7 +63,7 @@ describe('Controller: LogCtrl', function () {
                     resource: 'socialcommitments',
                     fields: ['created', 'action', '_id', 'performative', 'message', 'creditor', 'debtor', 'fulfilled'],
      //               criteria: { fulfilled: null },
-                    options: { skip: 0, limit: scope.limit, sort: '-created' },
+                    options: { skip: 0, limit: scope.limit, sort: [['created', 'descending']] },
                },
                access_token: ACCESS_TOKEN,
            }).respond([
@@ -89,7 +89,7 @@ describe('Controller: LogCtrl', function () {
                     resource: 'socialcommitments',
                     fields: ['created', 'action', '_id', 'performative', 'message', 'creditor', 'debtor', 'fulfilled'],
     //                criteria: { fulfilled: null },
-                    options: { skip: 0, limit: scope.limit, sort: '-created' },
+                    options: { skip: 0, limit: scope.limit, sort: [['created', 'descending']] },
                 },
                 access_token: ACCESS_TOKEN });
 
@@ -119,7 +119,7 @@ describe('Controller: LogCtrl', function () {
                         resource: 'socialcommitments',
                         fields: ['created', 'action', '_id', 'performative', 'message', 'creditor', 'debtor', 'fulfilled'],
 //                    criteria: { fulfilled: null },
-                        options: { skip: 0, limit: scope.limit, sort: '-created' },
+                        options: { skip: 0, limit: scope.limit, sort: [['created', 'descending']] },
                     },
                     access_token: ACCESS_TOKEN });
 
@@ -152,7 +152,7 @@ describe('Controller: LogCtrl', function () {
                         resource: 'socialcommitments',
                         fields: ['created', 'action', '_id', 'performative', 'message', 'creditor', 'debtor', 'fulfilled'],
     //                    criteria: { fulfilled: null },
-                        options: { skip: 10, limit: scope.limit, sort: '-created' },
+                        options: { skip: 10, limit: scope.limit, sort: [['created', 'descending']] },
                     },
                     access_token: ACCESS_TOKEN }).
                 respond([{ 
