@@ -42,10 +42,12 @@ angular.module('geboRegistrantHaiApp')
      */
     $scope.grantAccess = function(friend, permission) {
         Token.perform({
-                action: 'grantAccess',
                 receiver: Token.agent().email,
-                friend: friend,
-                permission: permission,
+                action: 'grantAccess',
+                content: {
+                    friend: friend,
+                    permission: permission,
+                }
           }).
         then(function() {
           }).

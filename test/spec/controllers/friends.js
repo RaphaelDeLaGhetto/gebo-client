@@ -118,15 +118,17 @@ describe('Controller: FriendsCtrl', function () {
 
         beforeEach(function() {
             $httpBackend.whenPOST(GEBO_ADDRESS + '/perform', {
-                    action: 'grantAccess',
                     receiver: token.agent().email,
-                    friend: 'john@painter.com',
-                    permission: {
-                            email: 'some@app.com',
-                            read: true,
-                            write: true,
-                            execute: false,
-                        },
+                    action: 'grantAccess',
+                    content: {
+                        friend: 'john@painter.com',
+                        permission: {
+                                email: 'some@app.com',
+                                read: true,
+                                write: true,
+                                execute: false,
+                            },
+                    },
                     access_token: ACCESS_TOKEN,
                 }).respond();
         });
@@ -134,15 +136,17 @@ describe('Controller: FriendsCtrl', function () {
         it('should attempt to perform the grantAccess action on the gebo', function() {
 
             $httpBackend.expectPOST(GEBO_ADDRESS + '/perform', {
-                    action: 'grantAccess',
                     receiver: token.agent().email,
-                    friend: 'john@painter.com',
-                    permission: {
-                            email: 'some@app.com',
-                            read: true,
-                            write: true,
-                            execute: false,
-                        },
+                    action: 'grantAccess',
+                    content: {
+                        friend: 'john@painter.com',
+                        permission: {
+                                email: 'some@app.com',
+                                read: true,
+                                write: true,
+                                execute: false,
+                            },
+                    },
                     access_token: ACCESS_TOKEN,
                 });
 
