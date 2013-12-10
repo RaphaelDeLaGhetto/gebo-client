@@ -170,7 +170,7 @@ describe('Controller: FriendsCtrl', function () {
                     receiver: token.agent().email,
                     action: 'certificate',
                     content: {
-                            agent: 'john@painter.com', 
+                            email: 'john@painter.com', 
                         },
                     access_token: ACCESS_TOKEN,
                 }).respond('some certificate');

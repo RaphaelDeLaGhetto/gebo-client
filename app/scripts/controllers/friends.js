@@ -65,7 +65,7 @@ angular.module('geboRegistrantHaiApp')
                 receiver: Token.agent().email,
                 action: 'certificate',
                 content: {
-                    agent: $scope.receiver,
+                    email: $scope.receiver,
                 },
             };
 
