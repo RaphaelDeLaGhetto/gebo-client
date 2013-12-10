@@ -71,12 +71,14 @@ angular.module('geboRegistrantHaiApp')
      */
     $scope.ls = function() {
         Token.perform({
+                receiver: Token.agent().email,
                 action: 'ls',
-                resource: 'conversations',
-                receiver: $scope.email,
-                fields: ['created', 'type', 'role', '_id', 'conversationId', 'socialCommitments'],
-//                criteria: { fulfilled: $scope.fulfilled },
-                options: { skip: _skip, limit: $scope.limit, sort: '-created' },
+                content: {
+                    resource: 'conversations',
+                    fields: ['created', 'type', 'role', '_id', 'conversationId', 'socialCommitments'],
+    //                criteria: { fulfilled: $scope.fulfilled },
+                    options: { skip: _skip, limit: $scope.limit, sort: [['created', 'descending']] },
+                }
           }).
         then(function(conversations) {
             $scope.conversations = conversations;

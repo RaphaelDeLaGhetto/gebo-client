@@ -44,19 +44,31 @@ describe('Controller: ConversationsCtrl', function () {
                 Token: token,
                 Request: request
               });
-   
+
+        /**
+         * Spies
+         */
+        spyOn(token, 'agent').andCallFake(function() {
+                return {
+                        name: 'Dan',
+                        email: 'dan@example.com',    
+                    };
+              });  
+
        /**
         * $httpBackend
         */
 
        // Get a list of conversations
        $httpBackend.whenPOST(GEBO_ADDRESS + '/perform', {
+               receiver: token.agent().email,
                action: 'ls',
-               resource: 'conversations',
-               recipient: token.agent().email,
-               fields: ['created', 'type', 'role', '_id', 'conversationId', 'socialCommitments'],
-//               criteria: { terminated: false },
-               options: { skip: 0, limit: scope.limit, sort: '-created' },
+               content: {
+                   resource: 'conversations',
+                   fields: ['created', 'type', 'role', '_id', 'conversationId', 'socialCommitments'],
+    //               criteria: { terminated: false },
+                   options: { skip: 0, limit: scope.limit, sort: [['created', 'descending']] },
+               },
                access_token: ACCESS_TOKEN,
            }).respond([
                    { 
@@ -80,12 +92,14 @@ describe('Controller: ConversationsCtrl', function () {
 
         // When the page is loaded, the $watch:page event gets fired
         $httpBackend.expectPOST(GEBO_ADDRESS + '/perform', {
+                receiver: token.agent().email,
                 action: 'ls',
-                resource: 'conversations',
-                recipient: token.agent().email,
-                fields: ['created', 'type', 'role', '_id', 'conversationId', 'socialCommitments'],
-//               criteria: { terminated: false },
-                options: { skip: 0, limit: scope.limit, sort: '-created' },
+                content: {
+                    resource: 'conversations',
+                    fields: ['created', 'type', 'role', '_id', 'conversationId', 'socialCommitments'],
+    //               criteria: { terminated: false },
+                    options: { skip: 0, limit: scope.limit, sort: [['created', 'descending']] },
+                },
                 access_token: ACCESS_TOKEN });
         $httpBackend.flush();
     }));
@@ -107,12 +121,14 @@ describe('Controller: ConversationsCtrl', function () {
 
         it('should ask for the appropriate range of conversations', function() {
             $httpBackend.expectPOST(GEBO_ADDRESS + '/perform', {
+                receiver: token.agent().email,
                 action: 'ls',
-                resource: 'conversations',
-                recipient: token.agent().email,
-                fields: ['created', 'type', 'role', '_id', 'conversationId', 'socialCommitments'],
-//               criteria: { terminated: false },
-                options: { skip: 0, limit: scope.limit, sort: '-created' },
+                content: {
+                    resource: 'conversations',
+                    fields: ['created', 'type', 'role', '_id', 'conversationId', 'socialCommitments'],
+    //               criteria: { terminated: false },
+                    options: { skip: 0, limit: scope.limit, sort: [['created', 'descending']] },
+                },
                 access_token: ACCESS_TOKEN });
         
             scope.conversations = [];
@@ -144,12 +160,14 @@ describe('Controller: ConversationsCtrl', function () {
 
         it('should load new conversations when it changes', function() {
             $httpBackend.expectPOST(GEBO_ADDRESS + '/perform', {
+                    receiver: token.agent().email,
                     action: 'ls',
-                    resource: 'conversations',
-                    recipient: token.agent().email,
-                    fields: ['created', 'type', 'role', '_id', 'conversationId', 'socialCommitments'],
-//                    criteria: { terminated: false },
-                    options: { skip: 10, limit: scope.limit, sort: '-created' },
+                    content: {
+                        resource: 'conversations',
+                        fields: ['created', 'type', 'role', '_id', 'conversationId', 'socialCommitments'],
+    //                    criteria: { terminated: false },
+                        options: { skip: 10, limit: scope.limit, sort: [['created', 'descending']] },
+                    },
                     access_token: ACCESS_TOKEN }).
                 respond([
                    { 
